@@ -1,0 +1,16 @@
+# Ignore MATLAB system files
+*.asv
+*.autosave
+slprj/
+
+# Ignore Large Data & Toolboxes
+data/
+lib/
+*.mat
+*.stl
+*.nii
+*.fig
+
+# OS files
+.DS_Store
+Thumbs.db
