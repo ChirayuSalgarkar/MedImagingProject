@@ -72,11 +72,10 @@ vol_mask = double(vol_mask); % Convert logical to 0/1
 
 fprintf('Voxelization complete. Volume fraction: %.2f%%\n', 100*mean(vol_mask(:)));
 
-%% 5. Map Physical Properties
-% Create property maps based on the mask
-
+%% 5. Assign Acoustic Properties
 medium.sound_speed = ones(size(vol_mask)) * 1500; % Background (Water)
 medium.density     = ones(size(vol_mask)) * 1000; % Background (Water)
+medium.alpha_coeff = ones(size(vol_mask)) * 0.002; % Background (Low attenuation)
 
 % Assign Fetal properties inside the mask
 medium.sound_speed(vol_mask == 1) = p.us.c0;
