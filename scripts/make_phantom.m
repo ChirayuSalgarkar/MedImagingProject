@@ -5,7 +5,7 @@
 clear; clc;
 
 %% 1. Configuration
-filename = 'babyMSR.stl'; % Change this to the real file later
+filename = 'BabyMSR.stl'; % Change this to the real file later
 input_path = fullfile('data', 'input', filename);
 output_path = fullfile('data', 'output', 'phantom_data.mat');
 
