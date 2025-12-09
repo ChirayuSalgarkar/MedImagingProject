@@ -1,13 +1,12 @@
 % scripts/make_phantom_mrilab_master.m
 % Purpose: High-Fidelity "Baby Yoda" Phantom Generation for MRiLab
 % Features: 128^3 Resolution, Procedural Internal Anatomy, 1.5T Physics
-% Reference: [cite: 14, 16] STL to Volume, Physical Property Mapping
+
 
 clear; clc; close all;
 
 %% 1. Configuration
 % High density for "well setup" simulation. 
-% 128 is the sweet spot: High detail, but wont crash MRiLab.
 GRID_SIZE = 128; 
 
 input_file = fullfile('data', 'input', 'BabyMSR.stl');
@@ -139,7 +138,7 @@ TypeNum(mask_brain)  = 4;
 VObj.TypeNum = double(TypeNum);
 
 % 2. The Legend (What is what?)
-% MRiLab crashes if TypeNum exists but 'Type' struct is missing!
+% MRiLab crashes if TypeNum exists but 'Type' struct is missing! update, still broken somehow
 VObj.Type = struct();
 
 % Define Tissue 1: Skin
