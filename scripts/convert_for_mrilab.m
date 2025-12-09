@@ -1,7 +1,3 @@
-% scripts/convert_for_mrilab.m
-% Purpose: Convert voxel phantom to MRiLab VObj format
-% Reference: Assign modality-specific physical properties (T1, T2)
-
 clear; clc;
 
 input_file = fullfile('data', 'output', 'phantom_data.mat');
