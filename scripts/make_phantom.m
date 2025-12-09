@@ -1,6 +1,4 @@
 % scripts/make_phantom.m
-% Purpose: Convert STL mesh into a voxelized 3D matrix (k-Wave compatible)
-% Reference: [cite: 14] Convert STL into representation for simulation
 
 clear; clc;
 
@@ -12,7 +10,7 @@ output_path = fullfile('data', 'output', 'phantom_data.mat');
 % Load Physics Parameters
 p = setup_params(); 
 
-%% 2. Load and Scale STL File
+
 if ~isfile(input_path)
     error('STL file not found at %s', input_path);
 end
