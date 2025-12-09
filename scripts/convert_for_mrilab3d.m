@@ -1,7 +1,7 @@
 
 clear; clc;
 
-%% 1. Load Data
+
 input_file = fullfile('data', 'output', 'phantom_data.mat');
 if ~isfile(input_file), error('Run make_phantom.m first!'); end
 data = load(input_file);
@@ -9,30 +9,30 @@ data = load(input_file);
 fprintf('Original Grid: [%d x %d x %d]\n', size(data.vol_mask));
 fprintf('Downsampling to 64x64x64 for feasible 3D MRI simulation...\n');
 
-%% 2. Downsample to 64x64x64
+
 % We use 'nearest' to keep the mask binary (0 or 1), no blurry edges
 target_dim = [64, 64, 64];
 vol_3d_small = imresize3(data.vol_mask, target_dim, 'nearest');
 
-% Recalculate resolution (dx) because pixels are now bigger
+
 scale_ratio = size(data.vol_mask, 1) / target_dim(1);
 new_dx = data.dx * scale_ratio;
 
-%% 3. Define 3D MRI Physics
+
 % Initialize Background (Water)
 Rho = ones(size(vol_3d_small)) * 1.0; 
 T1  = ones(size(vol_3d_small)) * 3.0; 
 T2  = ones(size(vol_3d_small)) * 0.2; 
 T2Star = ones(size(vol_3d_small)) * 0.05; 
 
-% Assign Fetal Tissue
+
 tissue_mask = (vol_3d_small == 1);
 Rho(tissue_mask) = 0.8;
 T1(tissue_mask)  = 0.9;
 T2(tissue_mask)  = 0.05;
 T2Star(tissue_mask) = 0.03;
 
-% Add 3D Speckle Noise
+% Add 3D Speckle Noise, because it's fun!
 Rho(tissue_mask) = Rho(tissue_mask) .* (1 + 0.05 * randn(sum(tissue_mask(:)), 1));
 
 %% 4. Create VObj Structure
